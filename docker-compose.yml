@@ -1,0 +1,64 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coordinadora_app
+    ports:
+      - "${PORT:-4000}:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=${DB_USERNAME:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root_password}
+      - DB_DATABASE=${DB_DATABASE:-challenge_coordinadora}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - coordinadora_network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: coordinadora_db
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root_password}
+      - MYSQL_DATABASE=${DB_DATABASE:-challenge_coordinadora}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - coordinadora_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: coordinadora_redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - coordinadora_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  coordinadora_network:
+    driver: bridge

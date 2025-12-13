@@ -1,0 +1,6 @@
+# Infrastructure Layer - External Services & Implementations
+# This layer contains:
+# - persistence/: Database implementations (repositories)
+# - external-services/: Third-party API integrations
+# - config/: Configuration files and environment setup
+# - logging/: Logging implementations

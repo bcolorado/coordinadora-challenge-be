@@ -1,0 +1,6 @@
+# Adapters Layer - Interface Adapters
+# This layer contains:
+# - controllers/: HTTP controllers (handle requests/responses)
+# - presenters/: Response formatters
+# - validators/: Request validation
+# - di/: Dependency Injection container

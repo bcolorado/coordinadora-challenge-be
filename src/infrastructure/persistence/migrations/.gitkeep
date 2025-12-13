@@ -1,0 +1,2 @@
+# Migrations will be generated here by TypeORM
+# Run: npm run migration:generate -- -n MigrationName
