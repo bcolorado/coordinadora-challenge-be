@@ -10,6 +10,7 @@ export class CreateUsersTable1702490575000 implements MigrationInterface {
         document VARCHAR(50) NOT NULL,
         document_type VARCHAR(20) NOT NULL,
         email VARCHAR(255) NOT NULL,
+        hashed_password VARCHAR(255) NOT NULL,
         first_name VARCHAR(100) NOT NULL,
         second_name VARCHAR(100) NULL,
         first_surname VARCHAR(100) NOT NULL,
