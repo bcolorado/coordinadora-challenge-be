@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { User } from "@domain/entities/user.entity";
-import { IUserRepository } from "@domain/repositories/user.repository";
+import { IUserRepository } from "../repositories/user.repository";
 import { UserAlreadyExistsException } from "@domain/exceptions/auth.exceptions";
 import {
   RegisterRequestDto,

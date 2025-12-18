@@ -7,9 +7,10 @@ import { errorMiddleware } from "@framework/middlewares/error.middleware";
 export function createApp(): Application {
   const app = express();
 
-  // Middlewares
+  // middlewares
   app.use(express.json());
 
+  // routes
   app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
   app.get("/health", (_req, res) => {

@@ -1,6 +1,5 @@
 /**
- * Base Application Error
- * All custom errors extend from this class
+ * Base Application Error and custom errors extends from this class
  */
 export class AppError extends Error {
   public readonly statusCode: number;
