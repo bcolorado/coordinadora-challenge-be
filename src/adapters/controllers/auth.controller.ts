@@ -9,6 +9,12 @@ import {
   loginSchema,
   validate,
 } from "../validators/auth.validator";
+import {
+  RegisterRequestDto,
+  RegisterResponseDto,
+  LoginRequestDto,
+  LoginResponseDto,
+} from "@application/dtos/auth.dto";
 
 export class AuthController {
   constructor(
@@ -26,8 +32,9 @@ export class AuthController {
       );
     }
 
-    const result = await this.registerUserUseCase.execute(
-      requestBodyValidation.data
+    const input: RegisterRequestDto = requestBodyValidation.data;
+    const result: RegisterResponseDto = await this.registerUserUseCase.execute(
+      input
     );
 
     res.status(201).json(successResponse(result));
@@ -43,9 +50,8 @@ export class AuthController {
       );
     }
 
-    const result = await this.loginUserUseCase.execute(
-      requestBodyValidation.data
-    );
+    const input: LoginRequestDto = requestBodyValidation.data;
+    const result: LoginResponseDto = await this.loginUserUseCase.execute(input);
 
     res.status(200).json(successResponse(result));
   }

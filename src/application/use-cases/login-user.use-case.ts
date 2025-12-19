@@ -2,20 +2,7 @@ import bcrypt from "bcrypt";
 import { IUserRepository } from "@domain/repositories/user.repository";
 import { InvalidCredentialsException } from "@domain/exceptions/auth.exceptions";
 import { IJwtService } from "@infrastructure/services/jwt.service";
-
-export interface LoginUserInput {
-  email: string;
-  password: string;
-}
-
-export interface LoginUserOutput {
-  token: string;
-  user: {
-    id: number;
-    email: string;
-    fullName: string;
-  };
-}
+import { LoginRequestDto, LoginResponseDto } from "@application/dtos/auth.dto";
 
 export class LoginUserUseCase {
   constructor(
@@ -23,7 +10,7 @@ export class LoginUserUseCase {
     private readonly jwtService: IJwtService
   ) {}
 
-  async execute(input: LoginUserInput): Promise<LoginUserOutput> {
+  async execute(input: LoginRequestDto): Promise<LoginResponseDto> {
     const user = await this.userRepository.findByEmail(input.email);
     if (!user) {
       throw new InvalidCredentialsException();
@@ -42,7 +29,7 @@ export class LoginUserUseCase {
       email: user.email,
     });
 
-    return {
+    const response: LoginResponseDto = {
       token,
       user: {
         id: user.id!,
@@ -50,5 +37,7 @@ export class LoginUserUseCase {
         fullName: user.fullName,
       },
     };
+
+    return response;
   }
 }
