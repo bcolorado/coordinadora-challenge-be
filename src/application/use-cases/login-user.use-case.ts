@@ -1,5 +1,4 @@
-import bcrypt from "bcrypt";
-import { IUserRepository } from "@domain/repositories/user.repository";
+import { IUserRepository } from "../repositories/user.repository";
 import { InvalidCredentialsException } from "@domain/exceptions/auth.exceptions";
 import { IJwtService } from "@infrastructure/services/jwt.service";
 import { LoginRequestDto, LoginResponseDto } from "@application/dtos/auth.dto";
@@ -16,7 +15,7 @@ export class LoginUserUseCase {
       throw new InvalidCredentialsException();
     }
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = this.jwtService.compare(
       input.password,
       user.hashedPassword
     );

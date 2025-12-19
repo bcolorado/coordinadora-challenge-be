@@ -1,5 +1,5 @@
 import { User } from "@domain/entities/user.entity";
-import { IUserRepository } from "@domain/repositories/user.repository";
+import { IUserRepository } from "@application/repositories/user.repository";
 import { executeQuery } from "@infrastructure/config/database.config";
 
 interface UserRow {

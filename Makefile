@@ -2,7 +2,6 @@
 # Coordinadora Challenge - Makefile
 # ==========================================
 
-# Default target
 help:
 	@echo.
 	@echo   Coordinadora Challenge - Available Commands

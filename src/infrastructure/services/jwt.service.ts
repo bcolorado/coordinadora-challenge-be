@@ -1,4 +1,5 @@
 import jwt, { SignOptions, Secret } from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export interface JwtPayload {
   userId: number;
@@ -8,6 +9,7 @@ export interface JwtPayload {
 export interface IJwtService {
   sign(payload: JwtPayload): string;
   verify(token: string): JwtPayload | null;
+  compare(password: string, hashedPassword: string): boolean;
 }
 
 export class JwtService implements IJwtService {
@@ -37,5 +39,9 @@ export class JwtService implements IJwtService {
     } catch {
       return null;
     }
+  }
+
+  compare(password: string, hashedPassword: string): boolean {
+    return bcrypt.compareSync(password, hashedPassword);
   }
 }
