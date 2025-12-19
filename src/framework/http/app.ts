@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "@infrastructure/config/swagger.config";
 import routes from "@framework/routes";
@@ -9,6 +10,7 @@ export function createApp(): Application {
 
   // middlewares
   app.use(express.json());
+  app.use(cors());
 
   // routes
   app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
