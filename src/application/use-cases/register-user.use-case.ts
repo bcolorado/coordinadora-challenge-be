@@ -2,30 +2,17 @@ import bcrypt from "bcrypt";
 import { User } from "@domain/entities/user.entity";
 import { IUserRepository } from "@domain/repositories/user.repository";
 import { UserAlreadyExistsException } from "@domain/exceptions/auth.exceptions";
-
-export interface RegisterUserInput {
-  document: string;
-  documentType: string;
-  email: string;
-  password: string;
-  firstName: string;
-  secondName?: string | undefined;
-  firstSurname: string;
-  secondSurname?: string | undefined;
-}
-
-export interface RegisterUserOutput {
-  id: number;
-  email: string;
-  fullName: string;
-}
+import {
+  RegisterRequestDto,
+  RegisterResponseDto,
+} from "@application/dtos/auth.dto";
 
 const SALT_ROUNDS = 12;
 
 export class RegisterUserUseCase {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async execute(input: RegisterUserInput): Promise<RegisterUserOutput> {
+  async execute(input: RegisterRequestDto): Promise<RegisterResponseDto> {
     const existingByEmail = await this.userRepository.findByEmail(input.email);
     if (existingByEmail) {
       throw new UserAlreadyExistsException("email");
@@ -54,10 +41,12 @@ export class RegisterUserUseCase {
 
     const createdUser = await this.userRepository.create(user);
 
-    return {
+    const response: RegisterResponseDto = {
       id: createdUser.id!,
       email: createdUser.email,
       fullName: createdUser.fullName,
     };
+
+    return response;
   }
 }
