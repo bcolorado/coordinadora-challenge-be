@@ -21,6 +21,10 @@
     "lib": ["ES2016"],
     "types": ["node"],
 
+    // Decorator Support
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     // Other Outputs
     "sourceMap": true,
     "declaration": true,

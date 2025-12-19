@@ -25,9 +25,6 @@ const baseConfig: DataSourceOptions = {
 
 export const AppDataSource = new DataSource(baseConfig);
 
-/**
- * Initialize database connection
- */
 export async function initializeDatabase(): Promise<DataSource> {
   if (!AppDataSource.isInitialized) {
     await AppDataSource.initialize();
@@ -36,9 +33,6 @@ export async function initializeDatabase(): Promise<DataSource> {
   return AppDataSource;
 }
 
-/**
- * Close database connection
- */
 export async function closeDatabase(): Promise<void> {
   if (AppDataSource.isInitialized) {
     await AppDataSource.destroy();
@@ -48,9 +42,6 @@ export async function closeDatabase(): Promise<void> {
 
 /**
  * Execute raw SQL query
- * @param query SQL query string
- * @param parameters Query parameters
- * @returns Query result
  */
 export async function executeQuery<T>(
   query: string,
