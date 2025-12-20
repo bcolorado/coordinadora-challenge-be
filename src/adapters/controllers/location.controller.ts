@@ -1,3 +1,4 @@
+import { LocationResponseDto } from "./../../application/dtos/location.dto";
 import { Request, Response } from "express";
 import { GetLocationsUseCase } from "@application/use-cases/get-locations.use-case";
 import { successResponse } from "@shared/types/api-response";
@@ -8,7 +9,8 @@ export class LocationController {
 
   @HandleErrors()
   async getAll(_req: Request, res: Response): Promise<void> {
-    const locations = await this.getLocationsUseCase.execute();
+    const locations: LocationResponseDto[] =
+      await this.getLocationsUseCase.execute();
     res.status(200).json(successResponse(locations));
   }
 }
