@@ -1,4 +1,4 @@
-import { IUserRepository } from "@domain/repositories/user.repository";
+import { IUserRepository } from "@application/repositories/user.repository";
 import { User } from "@domain/entities/user.entity";
 
 export class MockUserRepository implements IUserRepository {

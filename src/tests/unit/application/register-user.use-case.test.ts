@@ -29,7 +29,6 @@ describe("RegisterUserUseCase", () => {
       `${mockRegisterDto.firstName} ${mockRegisterDto.firstSurname}`
     );
 
-    // Verify repository call
     const createdUser = await mockUserRepository.findByEmail(
       mockRegisterDto.email
     );
@@ -38,23 +37,19 @@ describe("RegisterUserUseCase", () => {
   });
 
   it("should throw UserAlreadyExistsException if email already exists", async () => {
-    // Seed existing user
     await registerUserUseCase.execute(mockRegisterDto);
 
-    // Attempt to register again
     await expect(registerUserUseCase.execute(mockRegisterDto)).rejects.toThrow(
       UserAlreadyExistsException
     );
     await expect(registerUserUseCase.execute(mockRegisterDto)).rejects.toThrow(
-      "A user with this email already exists"
+      "Un usuario con este campo email ya existe"
     );
   });
 
   it("should throw UserAlreadyExistsException if document already exists", async () => {
-    // Seed existing user
     await registerUserUseCase.execute(mockRegisterDto);
 
-    // Try to register with same document but different email
     const duplicateDocumentDto = {
       ...mockRegisterDto,
       email: "newemail@example.com",
@@ -65,6 +60,6 @@ describe("RegisterUserUseCase", () => {
     ).rejects.toThrow(UserAlreadyExistsException);
     await expect(
       registerUserUseCase.execute(duplicateDocumentDto)
-    ).rejects.toThrow("A user with this document already exists");
+    ).rejects.toThrow("Un usuario con este campo document ya existe");
   });
 });
