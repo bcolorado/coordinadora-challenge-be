@@ -46,7 +46,7 @@ export function HandleErrors() {
         res
           .status(500)
           .json(
-            errorResponse("INTERNAL_ERROR", "An unexpected error occurred")
+            errorResponse("INTERNAL_ERROR", "Ha ocurrido un error inesperado")
           );
       }
     };
