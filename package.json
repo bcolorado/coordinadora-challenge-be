@@ -11,7 +11,8 @@
     "start": "node -r tsconfig-paths/register dist/index.js",
     "migration:create": "ts-node src/infrastructure/persistence/migrator.ts create",
     "migration:run": "ts-node src/infrastructure/persistence/migrator.ts up",
-    "migration:revert": "ts-node src/infrastructure/persistence/migrator.ts down"
+    "migration:revert": "ts-node src/infrastructure/persistence/migrator.ts down",
+    "db:seed": "ts-node src/infrastructure/persistence/seed.ts"
   },
   "keywords": [],
   "author": "",
