@@ -4,45 +4,11 @@ Shipping quote and tracking API built with Express, TypeScript, and Clean Archit
 
 ## Quick Start (Docker)
 
-```bash
-# Start all services (app, MySQL, Redis)
-make up-build
-
-# Or using docker-compose directly
-docker-compose up -d --build
-```
-
-## Quick Start (Local)
-
-```bash
-npm install
+````bash
+# Configure environment
 cp .env.example .env
-npm run migration:run
-npm run db:seed
-npm run dev
-```
 
-## Make Commands
-
-```bash
-# Development
-make install          # Install dependencies
-make dev              # Run dev server
-make build            # Build TypeScript
-
-# Docker
-make up               # Start containers
-make up-build         # Build and start containers
-make down             # Stop containers
-make logs             # View logs
-
-# Database
-make db-shell         # MySQL CLI
-make redis-shell      # Redis CLI
-make migration-run    # Run migrations
-```
-
-## Environment Variables
+### Environment Variables
 
 ```env
 ### Server
@@ -62,7 +28,38 @@ REDIS_PORT=6379
 ### Auth vars
 JWT_SECRET=your-super-secret-key-here
 JWT_EXPIRES_IN=86400
-```
+````
+
+# Start all containers (app, MySQL, Redis)
+
+docker-compose up -d --build
+
+# Run migrations and seed
+
+docker exec coordinadora_app npm run migration:run
+docker exec coordinadora_app npm run db:seed
+
+````
+
+## Make Commands for local development
+
+```bash
+# Development
+make install          # Install dependencies
+make dev              # Run dev server
+make build            # Build TypeScript
+
+# Docker
+make up               # Start containers
+make up-build         # Build and start containers
+make down             # Stop containers
+make logs             # View logs
+
+# Database
+make db-shell         # MySQL CLI
+make redis-shell      # Redis CLI
+make migration-run    # Run migrations
+````
 
 ## Architecture
 
