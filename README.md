@@ -4,42 +4,41 @@ Shipping quote and tracking API built with Express, TypeScript, and Clean Archit
 
 ## Quick Start (Docker)
 
-````bash
-# Configure environment
-cp .env.example .env
+**1. Configure environment:**
 
-### Environment Variables
+```bash
+cp .env.example .env
+```
+
+**2. Environment Variables (`.env`):**
 
 ```env
-### Server
+# Server
 PORT=4000
 
-### Database (MySQL)
+# Database (MySQL)
 DB_HOST=localhost
 DB_PORT=3307
 DB_USERNAME=root
 DB_PASSWORD=root_password
 DB_DATABASE=challenge_coordinadora
 
-### Redis
+# Redis
 REDIS_HOST=localhost
 REDIS_PORT=6379
 
-### Auth vars
+# Auth
 JWT_SECRET=your-super-secret-key-here
 JWT_EXPIRES_IN=86400
-````
+```
 
-# Start all containers (app, MySQL, Redis)
+**3. Start containers and setup:**
 
+```bash
 docker-compose up -d --build
-
-# Run migrations and seed
-
 docker exec coordinadora_app npm run migration:run
 docker exec coordinadora_app npm run db:seed
-
-````
+```
 
 ## Make Commands for local development
 
@@ -59,7 +58,7 @@ make logs             # View logs
 make db-shell         # MySQL CLI
 make redis-shell      # Redis CLI
 make migration-run    # Run migrations
-````
+```
 
 ## Architecture
 
