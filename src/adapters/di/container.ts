@@ -46,7 +46,8 @@ const createShipmentUseCase = new CreateShipmentUseCase(
 const getUserShipmentsUseCase = new GetUserShipmentsUseCase(shipmentRepository);
 const getShipmentStatusUseCase = new GetShipmentStatusUseCase(
   shipmentRepository,
-  shipmentStatusEventRepository
+  shipmentStatusEventRepository,
+  quoteRepository
 );
 export const advanceShipmentStatusUseCase = new AdvanceShipmentStatusUseCase(
   shipmentRepository,

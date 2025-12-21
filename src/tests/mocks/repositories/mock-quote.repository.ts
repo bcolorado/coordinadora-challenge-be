@@ -1,4 +1,7 @@
-import { IQuoteRepository } from "@application/repositories/quote.repository";
+import {
+  IQuoteRepository,
+  QuoteWithLocations,
+} from "@application/repositories/quote.repository";
 import { Quote } from "@domain/entities/quote.entity";
 
 export class MockQuoteRepository implements IQuoteRepository {
@@ -18,6 +21,28 @@ export class MockQuoteRepository implements IQuoteRepository {
 
   async findById(id: number): Promise<Quote | null> {
     return this.quotes.find((q) => q.id === id) || null;
+  }
+
+  async findByIdWithLocations(id: number): Promise<QuoteWithLocations | null> {
+    const quote = this.quotes.find((q) => q.id === id);
+    if (!quote) return null;
+
+    return {
+      id: quote.id!,
+      originLocationId: quote.originLocationId,
+      destinationLocationId: quote.destinationLocationId,
+      actualWeightKg: quote.actualWeightKg,
+      chargeableWeightKg: quote.chargeableWeightKg,
+      quotedPriceCents: quote.quotedPriceCents,
+      origin: {
+        id: quote.originLocationId,
+        cityName: "Bogotá",
+      },
+      destination: {
+        id: quote.destinationLocationId,
+        cityName: "Medellín",
+      },
+    };
   }
 
   clear(): void {
