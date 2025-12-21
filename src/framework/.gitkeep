@@ -1,6 +1,0 @@
-# Framework Layer - Express.js Specific Code
-# This layer contains:
-# - http/: HTTP server setup and configuration
-# - middlewares/: Express middlewares
-# - routes/: Route definitions
-# - server.ts: Express app initialization

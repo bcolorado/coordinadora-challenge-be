@@ -1,6 +1,0 @@
-# Shared Layer - Cross-cutting Concerns
-# This layer contains:
-# - types/: Shared TypeScript types and interfaces
-# - utils/: Utility functions
-# - constants/: Application constants
-# - errors/: Base error classes
