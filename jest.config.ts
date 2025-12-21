@@ -10,12 +10,13 @@ module.exports = {
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
   },
   transform: {
-    "^.+\\.tsx?$": [
+    "^.+\\.(t|j)sx?$": [
       "ts-jest",
       {
         tsconfig: "tsconfig.jest.json",
       },
     ],
   },
+  transformIgnorePatterns: ["/node_modules/(?!uuid)"],
   setupFiles: ["dotenv/config"],
 };

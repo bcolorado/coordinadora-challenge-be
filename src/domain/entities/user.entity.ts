@@ -49,11 +49,7 @@ export class User {
     return parts.join(" ");
   }
 
-  /**
-   * Create a new User instance with updated properties
-   */
-  //TODO remove if not needed
-  with(props: Partial<UserProps>): User {
+  public with(props: Partial<UserProps>): User {
     return new User({
       id: props.id !== undefined ? props.id : this.id,
       document: props.document ?? this.document,
@@ -68,10 +64,8 @@ export class User {
         props.secondSurname !== undefined
           ? props.secondSurname
           : this.secondSurname,
-      createdAt:
-        props.createdAt !== undefined ? props.createdAt : this.createdAt,
-      updatedAt:
-        props.updatedAt !== undefined ? props.updatedAt : this.updatedAt,
+      createdAt: props.createdAt ?? this.createdAt,
+      updatedAt: props.updatedAt ?? this.updatedAt,
     });
   }
 }
