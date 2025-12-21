@@ -11,6 +11,8 @@ import { GetLocationsUseCase } from "@application/use-cases/get-locations.use-ca
 import { QuoteShipmentUseCase } from "@application/use-cases/quote-shipment.use-case";
 import { CreateShipmentUseCase } from "@application/use-cases/create-shipment.use-case";
 import { GetUserShipmentsUseCase } from "@application/use-cases/get-user-shipments.use-case";
+import { GetShipmentStatusUseCase } from "@application/use-cases/get-shipment-status.use-case";
+import { AdvanceShipmentStatusUseCase } from "@application/use-cases/advance-shipment-status.use-case";
 import { AuthController } from "@adapters/controllers/auth.controller";
 import { LocationController } from "@adapters/controllers/location.controller";
 import { QuoteController } from "@adapters/controllers/quote.controller";
@@ -21,8 +23,9 @@ const userRepository = new UserRepository();
 const locationRepository = new LocationRepository();
 const shippingRateRepository = new ShippingRateRepository();
 const quoteRepository = new QuoteRepository();
-const shipmentRepository = new ShipmentRepository();
-const shipmentStatusEventRepository = new ShipmentStatusEventRepository();
+export const shipmentRepository = new ShipmentRepository();
+export const shipmentStatusEventRepository =
+  new ShipmentStatusEventRepository();
 
 // Services
 const jwtService = new JwtService();
@@ -41,6 +44,14 @@ const createShipmentUseCase = new CreateShipmentUseCase(
   shipmentStatusEventRepository
 );
 const getUserShipmentsUseCase = new GetUserShipmentsUseCase(shipmentRepository);
+const getShipmentStatusUseCase = new GetShipmentStatusUseCase(
+  shipmentRepository,
+  shipmentStatusEventRepository
+);
+export const advanceShipmentStatusUseCase = new AdvanceShipmentStatusUseCase(
+  shipmentRepository,
+  shipmentStatusEventRepository
+);
 
 // Controllers
 export const authController = new AuthController(
@@ -54,5 +65,6 @@ export const quoteController = new QuoteController(quoteShipmentUseCase);
 
 export const shipmentController = new ShipmentController(
   createShipmentUseCase,
-  getUserShipmentsUseCase
+  getUserShipmentsUseCase,
+  getShipmentStatusUseCase
 );

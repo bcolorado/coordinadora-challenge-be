@@ -1,7 +1,0 @@
-# Domain Layer - Core Business Logic
-# This layer contains:
-# - entities/: Business entities (pure domain objects)
-# - value-objects/: Immutable value objects
-# - repositories/: Repository interfaces (contracts)
-# - services/: Domain services interfaces
-# - exceptions/: Domain-specific exceptions

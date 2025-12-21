@@ -2,4 +2,5 @@ import { ShipmentStatusEvent } from "@domain/entities/shipment-status-event.enti
 
 export interface IShipmentStatusEventRepository {
   create(event: ShipmentStatusEvent): Promise<ShipmentStatusEvent>;
+  findByShipmentId(shipmentId: number): Promise<ShipmentStatusEvent[]>;
 }

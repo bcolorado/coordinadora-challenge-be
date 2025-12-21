@@ -1,4 +1,4 @@
-import { Shipment } from "@domain/entities/shipment.entity";
+import { Shipment, ShipmentStatus } from "@domain/entities/shipment.entity";
 
 export interface ShipmentWithQuote {
   id: number;
@@ -11,6 +11,9 @@ export interface ShipmentWithQuote {
 
 export interface IShipmentRepository {
   create(shipment: Shipment): Promise<Shipment>;
+  findById(id: number): Promise<Shipment | null>;
+  findByTrackingNumber(trackingNumber: string): Promise<Shipment | null>;
   findByUserId(userId: number): Promise<Shipment[]>;
   findByUserIdWithQuote(userId: number): Promise<ShipmentWithQuote[]>;
+  updateStatus(id: number, status: ShipmentStatus): Promise<void>;
 }

@@ -2,7 +2,7 @@ import {
   IShipmentRepository,
   ShipmentWithQuote,
 } from "@application/repositories/shipment.repository";
-import { Shipment } from "@domain/entities/shipment.entity";
+import { Shipment, ShipmentStatus } from "@domain/entities/shipment.entity";
 
 export class MockShipmentRepository implements IShipmentRepository {
   private shipments: Shipment[] = [];
@@ -23,6 +23,12 @@ export class MockShipmentRepository implements IShipmentRepository {
     return this.shipments.find((s) => s.id === id) || null;
   }
 
+  async findByTrackingNumber(trackingNumber: string): Promise<Shipment | null> {
+    return (
+      this.shipments.find((s) => s.trackingNumber === trackingNumber) || null
+    );
+  }
+
   async findByUserId(userId: number): Promise<Shipment[]> {
     return this.shipments.filter((s) => s.userId === userId);
   }
@@ -38,6 +44,14 @@ export class MockShipmentRepository implements IShipmentRepository {
         quotedPriceCents: 0,
         createdAt: s.createdAt ?? new Date(),
       }));
+  }
+
+  async updateStatus(id: number, status: ShipmentStatus): Promise<void> {
+    const index = this.shipments.findIndex((s) => s.id === id);
+    if (index !== -1) {
+      const old = this.shipments[index]!;
+      this.shipments[index] = new Shipment({ ...old, currentStatus: status });
+    }
   }
 
   clear(): void {

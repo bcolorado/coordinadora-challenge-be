@@ -84,4 +84,53 @@ export class ShipmentRepository implements IShipmentRepository {
       createdAt: row.created_at,
     }));
   }
+
+  async findById(id: number): Promise<Shipment | null> {
+    const rows = await executeQuery<ShipmentRow[]>(
+      `SELECT id, user_id, quote_id, tracking_number, current_status, created_at, updated_at
+       FROM shipments WHERE id = ?`,
+      [id]
+    );
+
+    if (rows.length === 0) return null;
+
+    const row = rows[0]!;
+    return new Shipment({
+      id: row.id,
+      userId: row.user_id,
+      quoteId: row.quote_id,
+      trackingNumber: row.tracking_number,
+      currentStatus: row.current_status,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    });
+  }
+
+  async findByTrackingNumber(trackingNumber: string): Promise<Shipment | null> {
+    const rows = await executeQuery<ShipmentRow[]>(
+      `SELECT id, user_id, quote_id, tracking_number, current_status, created_at, updated_at
+       FROM shipments WHERE tracking_number = ?`,
+      [trackingNumber]
+    );
+
+    if (rows.length === 0) return null;
+
+    const row = rows[0]!;
+    return new Shipment({
+      id: row.id,
+      userId: row.user_id,
+      quoteId: row.quote_id,
+      trackingNumber: row.tracking_number,
+      currentStatus: row.current_status,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    });
+  }
+
+  async updateStatus(id: number, status: ShipmentStatus): Promise<void> {
+    await executeQuery(
+      `UPDATE shipments SET current_status = ?, updated_at = NOW() WHERE id = ?`,
+      [status, id]
+    );
+  }
 }

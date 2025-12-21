@@ -71,4 +71,29 @@ router.get("/", shipmentController.getAll.bind(shipmentController));
  */
 router.post("/", shipmentController.create.bind(shipmentController));
 
+/**
+ * @swagger
+ * /shipments/{trackingNumber}/status:
+ *   get:
+ *     summary: Get shipment status and history by tracking number
+ *     tags: [Shipments]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: trackingNumber
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Shipment status with history
+ *       404:
+ *         description: Shipment not found
+ */
+router.get(
+  "/:trackingNumber/status",
+  shipmentController.getStatus.bind(shipmentController)
+);
+
 export default router;
