@@ -18,3 +18,28 @@ export const mockQuoteRequest = {
   originId: 1,
   destinationId: 2,
 };
+
+export const mockCreateShipmentRequest = {
+  origin: {
+    id: 1,
+    cityName: "Bogotá",
+  },
+  destination: {
+    id: 2,
+    cityName: "Medellín",
+  },
+  actualWeight: 5.5,
+  volumetricWeight: 4,
+  chargeableWeight: 6,
+  rate: {
+    id: 1,
+    basePriceCents: 8000,
+    pricePerKgCents: 1500,
+  },
+  totalPriceCents: 17000,
+  dimensions: {
+    length: 30,
+    width: 20,
+    height: 15,
+  },
+};

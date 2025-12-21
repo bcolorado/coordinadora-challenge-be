@@ -48,4 +48,24 @@ export class User {
     ].filter(Boolean);
     return parts.join(" ");
   }
+
+  public with(props: Partial<UserProps>): User {
+    return new User({
+      id: props.id !== undefined ? props.id : this.id,
+      document: props.document ?? this.document,
+      documentType: props.documentType ?? this.documentType,
+      email: props.email ?? this.email,
+      hashedPassword: props.hashedPassword ?? this.hashedPassword,
+      firstName: props.firstName ?? this.firstName,
+      secondName:
+        props.secondName !== undefined ? props.secondName : this.secondName,
+      firstSurname: props.firstSurname ?? this.firstSurname,
+      secondSurname:
+        props.secondSurname !== undefined
+          ? props.secondSurname
+          : this.secondSurname,
+      createdAt: props.createdAt ?? this.createdAt,
+      updatedAt: props.updatedAt ?? this.updatedAt,
+    });
+  }
 }
