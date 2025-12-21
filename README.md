@@ -4,6 +4,8 @@ Shipping quote and tracking API built with Express, TypeScript, and Clean Archit
 
 ## Quick Start (Docker)
 
+In the root directory of the project run:
+
 **1. Configure environment:**
 
 ```bash
