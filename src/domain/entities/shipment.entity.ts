@@ -1,3 +1,4 @@
+export type { ShipmentStatus } from "./quote.entity";
 import { ShipmentStatus } from "./quote.entity";
 
 export interface ShipmentProps {

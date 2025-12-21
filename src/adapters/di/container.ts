@@ -10,6 +10,7 @@ import { LoginUserUseCase } from "@application/use-cases/login-user.use-case";
 import { GetLocationsUseCase } from "@application/use-cases/get-locations.use-case";
 import { QuoteShipmentUseCase } from "@application/use-cases/quote-shipment.use-case";
 import { CreateShipmentUseCase } from "@application/use-cases/create-shipment.use-case";
+import { GetUserShipmentsUseCase } from "@application/use-cases/get-user-shipments.use-case";
 import { AuthController } from "@adapters/controllers/auth.controller";
 import { LocationController } from "@adapters/controllers/location.controller";
 import { QuoteController } from "@adapters/controllers/quote.controller";
@@ -39,6 +40,7 @@ const createShipmentUseCase = new CreateShipmentUseCase(
   shipmentRepository,
   shipmentStatusEventRepository
 );
+const getUserShipmentsUseCase = new GetUserShipmentsUseCase(shipmentRepository);
 
 // Controllers
 export const authController = new AuthController(
@@ -50,4 +52,7 @@ export const locationController = new LocationController(getLocationsUseCase);
 
 export const quoteController = new QuoteController(quoteShipmentUseCase);
 
-export const shipmentController = new ShipmentController(createShipmentUseCase);
+export const shipmentController = new ShipmentController(
+  createShipmentUseCase,
+  getUserShipmentsUseCase
+);

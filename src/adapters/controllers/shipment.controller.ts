@@ -4,6 +4,10 @@ import { successResponse } from "@shared/types/api-response";
 import { HandleErrors } from "@shared/errors/error-handler.decorator";
 import { CreateShipmentUseCase } from "@application/use-cases/create-shipment.use-case";
 import {
+  GetUserShipmentsUseCase,
+  UserShipmentDto,
+} from "@application/use-cases/get-user-shipments.use-case";
+import {
   createShipmentSchema,
   validate,
 } from "../validators/shipment.validator";
@@ -17,7 +21,10 @@ interface AuthenticatedRequest extends Request {
 }
 
 export class ShipmentController {
-  constructor(private readonly createShipmentUseCase: CreateShipmentUseCase) {}
+  constructor(
+    private readonly createShipmentUseCase: CreateShipmentUseCase,
+    private readonly getUserShipmentsUseCase: GetUserShipmentsUseCase
+  ) {}
 
   @HandleErrors()
   async create(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -35,5 +42,13 @@ export class ShipmentController {
       await this.createShipmentUseCase.execute(input, userId);
 
     res.status(201).json(successResponse(result));
+  }
+
+  @HandleErrors()
+  async getAll(req: AuthenticatedRequest, res: Response): Promise<void> {
+    const userId = req.user!.userId;
+    const result: UserShipmentDto[] =
+      await this.getUserShipmentsUseCase.execute(userId);
+    res.status(200).json(successResponse(result));
   }
 }

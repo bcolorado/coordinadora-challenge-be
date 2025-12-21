@@ -1,4 +1,7 @@
-import { IShipmentRepository } from "@application/repositories/shipment.repository";
+import {
+  IShipmentRepository,
+  ShipmentWithQuote,
+} from "@application/repositories/shipment.repository";
 import { Shipment } from "@domain/entities/shipment.entity";
 
 export class MockShipmentRepository implements IShipmentRepository {
@@ -18,6 +21,23 @@ export class MockShipmentRepository implements IShipmentRepository {
 
   async findById(id: number): Promise<Shipment | null> {
     return this.shipments.find((s) => s.id === id) || null;
+  }
+
+  async findByUserId(userId: number): Promise<Shipment[]> {
+    return this.shipments.filter((s) => s.userId === userId);
+  }
+
+  async findByUserIdWithQuote(userId: number): Promise<ShipmentWithQuote[]> {
+    return this.shipments
+      .filter((s) => s.userId === userId)
+      .map((s) => ({
+        id: s.id!,
+        trackingNumber: s.trackingNumber,
+        status: s.currentStatus,
+        chargeableWeightKg: 0,
+        quotedPriceCents: 0,
+        createdAt: s.createdAt ?? new Date(),
+      }));
   }
 
   clear(): void {
