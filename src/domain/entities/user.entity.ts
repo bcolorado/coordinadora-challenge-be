@@ -48,30 +48,4 @@ export class User {
     ].filter(Boolean);
     return parts.join(" ");
   }
-
-  /**
-   * Create a new User instance with updated properties
-   */
-  //TODO remove if not needed
-  with(props: Partial<UserProps>): User {
-    return new User({
-      id: props.id !== undefined ? props.id : this.id,
-      document: props.document ?? this.document,
-      documentType: props.documentType ?? this.documentType,
-      email: props.email ?? this.email,
-      hashedPassword: props.hashedPassword ?? this.hashedPassword,
-      firstName: props.firstName ?? this.firstName,
-      secondName:
-        props.secondName !== undefined ? props.secondName : this.secondName,
-      firstSurname: props.firstSurname ?? this.firstSurname,
-      secondSurname:
-        props.secondSurname !== undefined
-          ? props.secondSurname
-          : this.secondSurname,
-      createdAt:
-        props.createdAt !== undefined ? props.createdAt : this.createdAt,
-      updatedAt:
-        props.updatedAt !== undefined ? props.updatedAt : this.updatedAt,
-    });
-  }
 }

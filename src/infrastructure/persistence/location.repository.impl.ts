@@ -27,6 +27,10 @@ export class LocationRepository implements ILocationRepository {
   }
 
   async findById(id: number): Promise<Location | null> {
+    if (id === undefined || id === null) {
+      return null;
+    }
+
     const rows = await executeQuery<LocationRow[]>(
       "SELECT id, city_name, created_at, updated_at FROM locations WHERE id = ?",
       [id]
