@@ -32,7 +32,7 @@ class SocketService {
       }
 
       try {
-        const secret = process.env["JWT_SECRET"] || "dev-secret";
+        const secret = process.env["JWT_SECRET"] || "default-secret";
         const decoded = jwt.verify(token, secret) as { userId: number };
         socket.userId = decoded.userId;
         next();
