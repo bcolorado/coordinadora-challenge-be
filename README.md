@@ -42,6 +42,15 @@ docker exec coordinadora_app npm run migration:run
 docker exec coordinadora_app npm run db:seed
 ```
 
+**4. Local Development (optional):**
+
+```bash
+npm install
+npm run migration:run
+npm run db:seed (optional but recommended)
+npm run dev
+```
+
 ## Make Commands for local development
 
 ```bash
