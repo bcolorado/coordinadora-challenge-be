@@ -37,7 +37,7 @@ JWT_EXPIRES_IN=86400
 **3. Start containers and setup:**
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 docker exec coordinadora_app npm run migration:run
 docker exec coordinadora_app npm run db:seed
 ```
