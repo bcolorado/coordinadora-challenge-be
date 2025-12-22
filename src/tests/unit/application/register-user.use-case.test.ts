@@ -2,7 +2,6 @@ import { RegisterUserUseCase } from "@application/use-cases/register-user.use-ca
 import { MockUserRepository } from "../../mocks/repositories/mock-user.repository";
 import { mockRegisterDto } from "../../mocks/data/mock-users.data";
 import { UserAlreadyExistsException } from "@domain/exceptions/auth.exceptions";
-import bcrypt from "bcrypt";
 
 // Mock bcrypt
 jest.mock("bcrypt", () => ({
