@@ -16,6 +16,8 @@ services:
       - DB_DATABASE=${DB_DATABASE:-challenge_coordinadora}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-86400}
     depends_on:
       db:
         condition: service_healthy
